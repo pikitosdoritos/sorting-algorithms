@@ -2,7 +2,28 @@ print("==" * 80)
 print("Bubble Sort")
 print("==" * 80)
 
-
+products = [
+    {
+        "title": "Apple Watch",
+        "price": 300.00,
+        "in_storage": 100
+    },
+    {
+        "title": "iPhone 12",
+        "price": 599.00,
+        "in_storage": 200
+    },
+    {
+        "title": "MacBook Air",
+        "price": 999.00,
+        "in_storage": 50
+    },
+    {
+        "title": "AirPods Pro",
+        "price": 249.00,
+        "in_storage": 150
+    }
+]
 array = [2, 4, 1, 98, 34, 3, 88]
 
 def compare_numbers(a, b):
@@ -26,4 +47,5 @@ def sort(array, compare):
     return array
 
 
-print(sort(array, compare_numbers))
+print(sort(products, lambda a, b: a["price"] > b["price"]))
+print(sort(products, lambda a, b: a["in_storage"] > b["in_storage"]))
