@@ -1,9 +1,15 @@
-array = [2, 4, 1, 98, 34, 3, 88]
+import time
+import random
+
+array = [random.randint(0, 1000) for _ in range(950)]
 
 def quick_sort(array, start=0, end=len(array) - 1):
     i = start
     j = end
     back = True
+    
+    if start >= end:
+        return array
     
     while i < j:
         if array[i] > array[j]:
@@ -24,5 +30,47 @@ def quick_sort(array, start=0, end=len(array) - 1):
         quick_sort(array, i+1, end)
 
     return array
-    
-print(quick_sort(array))
+
+def quick_sort_hoare(arr, left=0, right=None):
+    if right is None:
+        right = len(arr) - 1
+
+    if left >= right:
+        return arr
+
+    pivot = arr[(left + right) // 2]
+
+    i = left
+    j = right
+
+    while True:
+        while arr[i] < pivot:
+            i += 1
+        while arr[j] > pivot:
+            j -= 1
+
+        if i >= j:
+            break
+
+        arr[i], arr[j] = arr[j], arr[i]
+        i += 1
+        j -= 1  
+
+    quick_sort_hoare(arr, left, j)
+    quick_sort_hoare(arr, j + 1, right)
+
+    return arr
+
+start = time.time() 
+ 
+for _ in range(100):
+    quick_sort(array)
+
+print(time.time() - start)
+
+start = time.time() 
+ 
+for _ in range(100):
+    quick_sort_hoare(array)
+
+print(time.time() - start)
