@@ -31,35 +31,30 @@ def quick_sort(array, start=0, end=len(array) - 1):
 
     return array
 
-def quick_sort_hoare(arr, left=0, right=None):
-    if right is None:
-        right = len(arr) - 1
-
-    if left >= right:
-        return arr
-
-    pivot = arr[(left + right) // 2]
-
-    i = left
-    j = right
-
-    while True:
-        while arr[i] < pivot:
-            i += 1
-        while arr[j] > pivot:
-            j -= 1
-
-        if i >= j:
-            break
-
-        arr[i], arr[j] = arr[j], arr[i]
+def quick_sort_youtube(array, start=0, end=len(array) - 1):
+    if end - start < 2:
+        return array
+    
+    i = start
+    j = end - 1 
+    
+    pivot = array[end]
+    
+    while pivot >= array[i] and i < end:
         i += 1
-        j -= 1  
-
-    quick_sort_hoare(arr, left, j)
-    quick_sort_hoare(arr, j + 1, right)
-
-    return arr
+        
+    while pivot <= array[j] and j > start:
+        j -= 1
+        
+    if i > j:        
+        array[len(array) - 1], array[i] = array[i], pivot
+        
+        quick_sort_youtube(array, start, i - 1)
+        quick_sort_youtube(array, i + 1, end)
+        
+        return array
+    
+    array[i], array[j] = array[j], array[i]
 
 start = time.time() 
  
@@ -71,6 +66,6 @@ print(time.time() - start)
 start = time.time() 
  
 for _ in range(100):
-    quick_sort_hoare(array)
+    quick_sort_youtube(array)
 
 print(time.time() - start)
