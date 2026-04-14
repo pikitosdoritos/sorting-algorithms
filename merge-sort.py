@@ -9,18 +9,18 @@ def merge_sort(array):
     head = array[:mid_point]
     tail = array[mid_point:]
     
-    merge_sort(head)
-    merge_sort(tail)              
+    head = merge_sort(head)
+    tail = merge_sort(tail)              
     
     result = []
     
     while True:
         if len(tail) == 0:
-            result.append(*head)
+            result.extend(head)
             break
         
         if len(head) == 0:
-            result.append(*tail)
+            result.extend(tail)
             break
         
         if head[0] > tail[0]:
@@ -28,6 +28,6 @@ def merge_sort(array):
         elif head[0] < tail[0]:
             result.append(head.pop(0))
         
-    return head, tail
+    return result
 
 print(merge_sort(array))
