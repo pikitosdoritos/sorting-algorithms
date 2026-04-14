@@ -7,9 +7,9 @@ def merge_sort(array):
     
     mid_point = len(array) // 2
     head = array[:mid_point]
-    tail = array[mid_point:]
-    
     head = merge_sort(head)
+    
+    tail = array[mid_point:]
     tail = merge_sort(tail)              
     
     result = []
