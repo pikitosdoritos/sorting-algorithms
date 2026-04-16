@@ -8,8 +8,11 @@ def shell_sort(arr):
         j = i + gap
         
         while j < len(arr):
-            if arr[j] < arr[i]:
-                arr[i], arr[j] = arr[j], arr[i]
+            k = j
+            
+            while k - gap >= 0 and arr[k] < arr[k - gap]:
+                arr[k], arr[k - gap] = arr[k - gap], arr[k]
+                k -= gap
                 
             i += 1
             j += 1
